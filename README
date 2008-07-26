@@ -1,0 +1,69 @@
+* Name
+isbn.rb
+
+* Overview
+isbn.rb provides the ISBN class whose instance represents an ISBN code.
+There are two types of ISBNs which differ in the length of digits. 
+ISBN class abstructs both ISBN-10 and ISBN-13 in a same manner and 
+provides methods to convert one another. 
+
+isbn.rb also provides some methods to create new instances of ISBN class
+from Integer, String, and Array. 
+
+Typical use of isbn.rb is as follows.
+
+  irb(main):001:0> load "isbn.rb"
+  true
+
+  irb(main):002:0> sicp = ISBN.new("0262011530")
+  0262011530
+
+  irb(main):003:0> sicp.isbn13
+  9780262011532
+
+  irb(main):004:0> sicp.hyphenate(1,3,5)
+  "0-262-01153-0"
+
+  irb(main):005:0> sicp.isbn10
+  0262011530
+
+  ...
+
+  irb(main):010:0> sicpj = 9784894711631.to_isbn
+  9784894711631
+
+  irb(main):011:0> sicpj.isbn10.hyphenate(1,5,3," ")
+  "4 89471 163 X"
+
+* Change Log
+[2008-07-26] First version
+
+* Licence
+Copyright (c) 2008, Keiichirou SHIKANO <k16.shikano@gmail.com>
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+
+   * Redistributions of source code must retain the above copyright
+     notice,this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above
+     copyright notice, this list of conditions and the following
+     disclaimer in the documentation and/or other materials provided
+     with the distribution.
+   * Neither the name of the Keiichirou SHIKANO nor the names of its
+     contributors may be used to endorse or promote products derived
+     from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
+OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
