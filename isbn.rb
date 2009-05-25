@@ -76,6 +76,7 @@ class ISBN
 
  def initialize(*seed)
    if seed.length == 0
+     @raw
    else
      case seed[0]
        when String then d,s = seed[0].length, seed[0].isbn_string.to_i
@@ -93,27 +94,31 @@ class ISBN
  def isbn10
    raw = self.raw
    by_length(raw,
-             "put_cd10(raw[0..9])", 
+             "put_cd10(raw[0..9])",
              "put_cd10(raw[3..11])").to_isbn
  end
  def isbn13
    raw = self.raw
    by_length(raw,
-             "put_cd13([9,7,8] + raw[0..8])", 
+             "put_cd13([9,7,8] + raw[0..8])",
              "put_cd13(raw[0..11])").to_isbn
  end
 
  # ISBN -> String
- def hyphenate(*blocks)
+ def to_s(*blocks)
    mark = '-'
-   case blocks.last
-     when String then mark = blocks.pop
+   if blocks.length == 0
+     hyphenate = nil
+   else
+     case blocks.last
+       when String then mark = blocks.pop
+     end
    end
    
    raw = self.raw.dup
    l = raw.length-1
    positions = blocks.map_accum.delete_if{|x| x > l || x <= 0}
-   positions.push l unless positions.last == l
+   positions.push l unless positions.last == l || hyphenate.nil?
    positions.zip(Array.new(raw.length){|i| i}).map{|i,j| i+j}.each{|b|
      raw.insert(b, mark)
    }
@@ -121,5 +126,4 @@ class ISBN
  end
 
 end
-
 
