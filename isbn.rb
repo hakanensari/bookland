@@ -1,7 +1,8 @@
 #! /usr/bin/ruby
 
 module ISBNtools
- # most methods take an Array containing ISBN digits
+ # most methods take an Array containing ISBN digits.
+ # 'cd' means 'check digit'.
 
  def cd10(raw)
    seed, cd = raw[0..8], raw[9]
@@ -102,6 +103,10 @@ class ISBN
    by_length(raw,
              "put_cd13([9,7,8] + raw[0..8])",
              "put_cd13(raw[0..11])").to_isbn
+ end
+
+ def ==(other)
+   self.isbn13.to_s == other.isbn13.to_s
  end
 
  # ISBN -> String
