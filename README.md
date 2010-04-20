@@ -1,8 +1,5 @@
-<div style="text-align: center">
-  <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/2/28/EAN-13-ISBN-13.svg/500px-EAN-13-ISBN-13.svg.png" alt="ISBN">
-</div>
+![ISBN](http://upload.wikimedia.org/wikipedia/commons/thumb/2/28/EAN-13-ISBN-13.svg/750px-EAN-13-ISBN-13.svg.png)
 
-# Bookland
 Bookland provides an ISBN class. The class abstracts ISBN-10 and ISBN-13s and offers methods to convert and compare one to the other.
 
     $ irb -r "bookland"
