@@ -1,17 +1,16 @@
-module ISBNtools
+module Bookland
+  
   # most methods take an Array containing ISBN digits.
   # 'cd' means 'check digit'.
 
   def cd10(raw)
     seed, cd = raw[0..8], raw[9]
     v = 11 - [10,9,8,7,6,5,4,3,2].zip(seed).map{|n,m| n*m}.inject(0){|i,j| i+j} % 11
-    #return v
   end
 
   def cd13(raw)
     seed, cd = raw[0..11], raw[12]
     v = (10 - [1,3,1,3,1,3,1,3,1,3,1,3].zip(seed).map{|n,m| n*m}.inject(0){|i,j| i+j} % 10) % 10
-    #return v
   end
 
   def put_cd10(raw)
@@ -73,7 +72,7 @@ class Integer
 end
 
 class Array
-  include ISBNtools
+  include Bookland
   
   def to_isbn
     inject(''){|i,j| isbnchar(i) + isbnchar(j)}.to_isbn
@@ -87,7 +86,7 @@ class Array
 end
 
 class ISBN
-  include ISBNtools
+  include Bookland
   attr_accessor :raw
 
   def initialize(*seed)
