@@ -1,6 +1,5 @@
 require File.expand_path("../../lib/bookland", __FILE__)
 
-require "rspec"
 require "yaml"
 
 def isbns

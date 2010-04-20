@@ -106,13 +106,13 @@ class ISBN
   end
 
   # ISBN -> ISBN
-  def isbn10
+  def to_isbn10
     raw = self.raw
     by_length(raw,
               "put_cd10(raw[0..9])",
               "put_cd10(raw[3..11])").to_isbn
   end
-  def isbn13
+  def to_isbn13
     raw = self.raw
     by_length(raw,
               "put_cd13([9,7,8] + raw[0..8])",
