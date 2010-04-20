@@ -38,15 +38,15 @@ module ISBNtools
     end
   end
 
- def isbnchar(i) # needed only for ISBN-10
-   case i
-   when String then i
-   when 0..9 then i.to_s
-   when 10 then 'X'
-   when 11 then '0'
-   else '*'
-   end
- end
+  def isbnchar(i) # needed only for ISBN-10
+    case i
+    when String then i
+    when 0..9 then i.to_s
+    when 10 then 'X'
+    when 11 then '0'
+    else '*'
+    end
+  end
 end
 
 class String
