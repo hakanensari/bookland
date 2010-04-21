@@ -102,7 +102,7 @@ class ISBN
   end
 
   def inspect
-    raw.inject('') { |i,j| isbnchar(i) + isbnchar(j) }
+    raw ? raw.inject('') { |i,j| isbnchar(i) + isbnchar(j) } : false
   end
 
   # ISBN -> ISBN
