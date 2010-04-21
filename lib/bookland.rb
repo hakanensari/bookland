@@ -5,12 +5,12 @@ module Bookland
 
   def cd10(raw)
     seed, cd = raw[0..8], raw[9]
-    v = 11 - [10,9,8,7,6,5,4,3,2].zip(seed).map{|n,m| n*m}.inject(0){|i,j| i+j} % 11
+    v = 11 - [10,9,8,7,6,5,4,3,2].zip(seed).map { |n,m| n * m }.inject(0) { |i,j| i+j } % 11
   end
 
   def cd13(raw)
     seed, cd = raw[0..11], raw[12]
-    v = (10 - [1,3,1,3,1,3,1,3,1,3,1,3].zip(seed).map{|n,m| n*m}.inject(0){|i,j| i+j} % 10) % 10
+    v = (10 - [1,3,1,3,1,3,1,3,1,3,1,3].zip(seed).map { |n,m| n * m }.inject(0){ |i,j| i+j } % 10) % 10
   end
 
   def put_cd10(raw)
@@ -75,12 +75,12 @@ class Array
   include Bookland
   
   def to_isbn
-    inject(''){|i,j| isbnchar(i) + isbnchar(j)}.to_isbn
+    inject('') { |i,j| isbnchar(i) + isbnchar(j) }.to_isbn
   end
   
   def map_accum
     raw = []
-    each_index{|i| raw << self[0..i].inject(0){|n,m| n+m}}
+    each_index { |i| raw << self[0..i].inject(0) { |n,m| n+m } }
     return raw
   end
 end
@@ -97,12 +97,12 @@ class ISBN
         when String then d,s = seed[0].length, seed[0].isbn_string.to_i
         when Integer then d,s = seed[0].digit(10), s = seed[0]
       end
-      @raw = put_cd(Array.new(d <= 10 ? 10 : 13){|i| 10**i}.reverse.map{|ord| s/ord%10})
+      @raw = put_cd(Array.new(d <= 10 ? 10 : 13) { |i| 10**i }.reverse.map { |ord| s / ord % 10 })
     end
   end
 
   def inspect
-    raw.inject(''){|i,j| isbnchar(i) + isbnchar(j)}
+    raw.inject('') { |i,j| isbnchar(i) + isbnchar(j) }
   end
 
   # ISBN -> ISBN
