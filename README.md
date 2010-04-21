@@ -1,6 +1,8 @@
-![ISBN](http://upload.wikimedia.org/wikipedia/commons/thumb/2/28/EAN-13-ISBN-13.svg/750px-EAN-13-ISBN-13.svg.png)
+![ISBN](http://upload.wikimedia.org/wikipedia/commons/thumb/2/28/EAN-13-ISBN-13.svg/900px-EAN-13-ISBN-13.svg.png)
 
-Bookland provides an ISBN class. The class abstracts ISBN-10 and ISBN-13s and offers methods to convert and compare one to the other.
+Bookland provides a simple ISBN class in Ruby.
+
+The class abstracts ISBN-10 and ISBN-13s and offers methods to convert and compare one to the other.
 
     $ irb -r "bookland"
     >> book = ISBN.new("0262011530")
