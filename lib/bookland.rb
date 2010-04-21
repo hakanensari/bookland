@@ -5,12 +5,12 @@ module Bookland
 
   def cd10(raw)
     seed, cd = raw[0..8], raw[9]
-    v = 11 - [10,9,8,7,6,5,4,3,2].zip(seed).map { |n,m| n * m }.inject(0) { |i,j| i+j } % 11
+    v = 11 - [10, 9, 8, 7, 6, 5, 4, 3, 2].zip(seed).map { |n,m| n * m }.inject(0) { |i,j| i+j } % 11
   end
 
   def cd13(raw)
     seed, cd = raw[0..11], raw[12]
-    v = (10 - [1,3,1,3,1,3,1,3,1,3,1,3].zip(seed).map { |n,m| n * m }.inject(0){ |i,j| i+j } % 10) % 10
+    v = (10 - [1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3].zip(seed).map { |n,m| n * m }.inject(0){ |i,j| i+j } % 10) % 10
   end
 
   def put_cd10(raw)
@@ -90,6 +90,7 @@ class ISBN
   attr_accessor :raw
 
   def initialize(*seed)
+    seed = seed.to_s
     if seed.length == 0
       @raw
     else
@@ -101,22 +102,22 @@ class ISBN
     end
   end
 
+  def valid?
+    false
+  end
+  
   def inspect
-    raw ? raw.inject('') { |i,j| isbnchar(i) + isbnchar(j) } : false
+    raw.inject('') { |i,j| isbnchar(i) + isbnchar(j) }
   end
 
   # ISBN -> ISBN
   def to_isbn10
     raw = self.raw
-    by_length(raw,
-              "put_cd10(raw[0..9])",
-              "put_cd10(raw[3..11])").to_isbn
+    by_length(raw,"put_cd10(raw[0..9])", "put_cd10(raw[3..11])").to_isbn
   end
   def to_isbn13
     raw = self.raw
-    by_length(raw,
-              "put_cd13([9,7,8] + raw[0..8])",
-              "put_cd13(raw[0..11])").to_isbn
+    by_length(raw, "put_cd13([9,7,8] + raw[0..8])", "put_cd13(raw[0..11])").to_isbn
   end
 
   def ==(other)
