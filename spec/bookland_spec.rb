@@ -2,79 +2,72 @@ require "spec_helper"
 
 module Bookland
   describe ISBN do
-    
-    
-    
-    it "should cast as string" do
-      ISBN.new('0262011530').to_s.should == '0262011530'
-    end
-    
-    it "should cast as string and format" do
-      ISBN.new('0262011530').to_s(1, 3, 5).should == '0-262-01153-0'
-    end
-    
     it "should convert an ISBN-10 to ISBN-13" do
       isbns do |isbn10, isbn13|
-        ISBN.new(isbn10).to_isbn13.to_s.should == isbn13
+        ISBN.new(isbn10).to_isbn13.should == ISBN.new(isbn13)
       end
     end
-  
+
     it "should convert an ISBN-13 to ISBN-10" do
        isbns do |isbn10, isbn13|
-         ISBN.new(isbn13).to_isbn10.to_s.should == isbn10
+         ISBN.new(isbn13).to_isbn10.should == ISBN.new(isbn10)
        end
      end
-     
+
      it "should equate ISBN-10 and ISBN-13" do
        isbns do |isbn10, isbn13|
          ISBN.new(isbn10).should == ISBN.new(isbn13)
        end
      end
-   
-     it "should validate valid ISBN-10s" do
+
+     it "should validate ISBN-10s" do
        isbns do |isbn10, isbn13|
-         ISBN.new(isbn10).valid?.should be_true
+         lambda { ISBN.new(isbn10) }.should_not raise_error
        end
      end
-   
-     it "should validate valid ISBN-13s" do
+
+     it "should validate ISBN-13s" do
        isbns do |isbn10, isbn13|
-         ISBN.new(isbn13).valid?.should be_true
+         lambda { ISBN.new(isbn13) }.should_not raise_error
        end
      end
-   
+
      it "should not validate if seed looks like an ISBN-13 but has an invalid check digit" do
        isbns do |isbn10, isbn13|
-         invalid = isbn13.gsub(/(.)$/, "#{(isbn13.split(//).last.to_i - 2) % 10}")
-         ISBN.new(invalid).valid?.should be_false
+         inv = isbn13.gsub(/(.)$/, "#{(isbn13.split(//).last.to_i - 2) % 10}")
+         lambda { ISBN.new(inv) }.should raise_error ISBNError
        end
      end
-   
+
      it "should not validate if seed looks like an ISBN-10 but has an invalid check digit" do
        isbns do |isbn10, isbn13|
-         invalid = isbn10.gsub(/(.)$/, "#{(isbn10.split(//).last.to_i - 2) % 10}")
-         ISBN.new(invalid).valid?.should be_false
+         inv = isbn10.gsub(/(.)$/, "#{(isbn10.split(//).last.to_i - 2) % 10}")
+         lambda { ISBN.new(inv) }.should raise_error ISBNError
        end
      end
-   
+
      it "should not validate if seed is not an ISBN" do
-       %w{foo 1}.each { |seed| ISBN.new(seed).valid?.should be_false }
+       %w{foo 1}.each { |seed| lambda { ISBN.new(seed) }.should raise_error ISBNError }
      end
-   
+
      it "should not validate if seed is blank" do
-       ISBN.new('').valid?.should be_false
+       lambda { ISBN.new('') }.should raise_error ISBNError
      end
-   
+
      it "should not validate if seed is nil" do
-       ISBN.new(nil).valid?.should be_false
+       lambda { ISBN.new(nil) }.should raise_error ISBNError
      end
-   
-     it "should hyphenate an ISBN-13" do
+
+     it "should cast as string" do
+       Bookland::ISBN.new('0262011530').to_s.should == '0262011530'
+     end
+
+     it "should cast as string and hyphenate an ISBN-13" do
        ISBN.new("9780485113358").to_s(3, 10).should == '978-0485113358'
      end
-   
-     it "should hyphenate an ISBN-10" do
-       ISBN.new("9780485113358").to_isbn10.to_s(1, 3, 5, 1).should == '0-485-11335-X'
+
+     it "should cast as string and hyphenate an ISBN-10" do
+       ISBN.new("048511335X").to_s(1, 3, 5, 1).should == '0-485-11335-X'
      end
   end
 end
