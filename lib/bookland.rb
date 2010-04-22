@@ -20,7 +20,7 @@ module Bookland
       self.to_isbn13.to_s == other.to_isbn13.to_s
     end
 
-    def to_s(*blocks) 
+    def to_s(*blocks)
       raw = @raw.dup.inject('') { |i,j| isbnchar(i) + isbnchar(j) }.split(//)
       blocks.any? ? (blocks.map { |i| raw.shift(i).to_s } << raw.to_s).delete_if(&:empty?).join('-') : raw.to_s
     end
@@ -28,14 +28,14 @@ module Bookland
     private
     
     def isbnchar(i) # needed only for ISBN-10
-        case i
-        when String then i
-        when 0..9 then i.to_s
-        when 10 then 'X'
-        when 11 then '0'
-        else '*'
-        end
+      case i
+      when String then i
+      when 0..9 then i.to_s
+      when 10 then 'X'
+      when 11 then '0'
+      else '*'
       end
+    end
     
     def cd10(raw)
       seed, cd = raw[0..8], raw[9]
@@ -60,7 +60,7 @@ module Bookland
     end
 
     def by_length(raw, do10, do13)
-      eval raw.length < 11 ? do10 : do13
+      eval raw.length <= 11 ? do10 : do13
     end
 
     def isbnchar(i) # needed only for ISBN-10
