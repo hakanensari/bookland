@@ -20,33 +20,22 @@ module Bookland
       self.to_isbn13.to_s == other.to_isbn13.to_s
     end
 
-    def to_s(*blocks)
-      return "okj"
-      return 1
-      if blocks.length == 0
-        return put_cd(@raw)
-      end
-            # 
-            # mark = '-'
-            # if blocks.length == 0
-            #   hyphenate = nil
-            # else
-            #   case blocks.last
-            #     when String then mark = blocks.pop
-            #   end
-            # end
-            # 
-            # raw = @raw.dup
-            # l = raw.length-1
-            # positions = blocks.map_accum.delete_if { |x| x > l || x <= 0 }
-            # positions.push l unless positions.last == l || hyphenate.nil?
-            # positions.zip(Array.new(raw.length) { |i| i }).map { |i, j| i + j }.each do |b|
-            #   raw.insert(b, mark)
-            # end
-            # raw.inject('') { |i,j| isbnchar(i) + isbnchar(j) }
+    def to_s(*blocks) 
+      raw = @raw.dup.inject('') { |i,j| isbnchar(i) + isbnchar(j) }.split(//)
+      blocks.any? ? (blocks.map { |i| raw.shift(i).to_s } << raw.to_s).delete_if(&:empty?).join('-') : raw.to_s
     end
     
     private
+    
+    def isbnchar(i) # needed only for ISBN-10
+        case i
+        when String then i
+        when 0..9 then i.to_s
+        when 10 then 'X'
+        when 11 then '0'
+        else '*'
+        end
+      end
     
     def cd10(raw)
       seed, cd = raw[0..8], raw[9]
@@ -67,7 +56,6 @@ module Bookland
     end
 
     def put_cd(raw)
-      return "ok"
       by_length(raw, "put_cd10(raw)", "put_cd13(raw)")
     end
 
