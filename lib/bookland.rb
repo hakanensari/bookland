@@ -6,7 +6,7 @@ module Bookland
     end
 
     def valid?
-      !@raw.empty? && (@seed[12] == cd13(@raw) rescue false || @seed[9] == cd10(@raw))
+      !@raw.empty? && (@seed[12] == cd13(@raw) rescue false || @seed[9] == cd10(@raw) rescue false)
     end
   
     def to_isbn10

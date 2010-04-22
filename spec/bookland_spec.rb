@@ -45,14 +45,14 @@ module Bookland
    
      it "should not validate if seed looks like an ISBN-13 but has an invalid check digit" do
        isbns do |isbn10, isbn13|
-         invalid = isbn13.gsub(/(.)$/, "#{(isbn13.split(//).last.to_i - 8) % 10}")
+         invalid = isbn13.gsub(/(.)$/, "#{(isbn13.split(//).last.to_i - 2) % 10}")
          ISBN.new(invalid).valid?.should be_false
        end
      end
    
      it "should not validate if seed looks like an ISBN-10 but has an invalid check digit" do
        isbns do |isbn10, isbn13|
-         invalid = isbn10.gsub(/(.)$/, (('0'..'9').to_a + ['X'] - ['\1'])[rand(11)])
+         invalid = isbn10.gsub(/(.)$/, "#{(isbn10.split(//).last.to_i - 2) % 10}")
          ISBN.new(invalid).valid?.should be_false
        end
      end
@@ -74,8 +74,7 @@ module Bookland
      end
    
      it "should hyphenate an ISBN-10" do
-       p ISBN.new("9780485113358").to_isbn10.should == ISBN.new("0-485-11335-X")
-       # ISBN.new("9780485113358").to_isbn10.to_s(1, 3, 5, 1).should == '0-485-11335-X'
+       ISBN.new("9780485113358").to_isbn10.to_s(1, 3, 5, 1).should == '0-485-11335-X'
      end
   end
 end
