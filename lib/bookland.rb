@@ -1,11 +1,12 @@
 module Bookland
   class ISBN
     def initialize(seed)
-      @raw = seed.length == 0 ? [] : put_cd(seed.gsub(/[Xx]/, '0').gsub(/[^0-9]/, '').split(//).map { |c| c.to_i })
+      @seed = @raw = seed.length == 0 ? [] : seed.gsub(/[Xx]/, '0').gsub(/[^0-9]/, '').split(//).map { |c| c.to_i } rescue @raw = []
+      @raw = seed.length == 0 ? [] : put_cd(seed.gsub(/[Xx]/, '0').gsub(/[^0-9]/, '').split(//).map { |c| c.to_i }) rescue @raw = []
     end
 
     def valid?
-      false
+      !@raw.empty? && (@seed[12] == cd13(@raw) rescue false || @seed[9] == cd10(@raw))
     end
   
     def to_isbn10

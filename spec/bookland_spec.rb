@@ -45,7 +45,7 @@ module Bookland
    
      it "should not validate if seed looks like an ISBN-13 but has an invalid check digit" do
        isbns do |isbn10, isbn13|
-         invalid = isbn13.gsub(/(.)$/, (('0'..'9').to_a - ['\1'])[rand(10)])
+         invalid = isbn13.gsub(/(.)$/, "#{(isbn13.split(//).last.to_i - 8) % 10}")
          ISBN.new(invalid).valid?.should be_false
        end
      end
