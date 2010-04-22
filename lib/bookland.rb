@@ -39,7 +39,7 @@ module Bookland
     private
 
     def cd10(raw)
-      cd = 11 - [10, 9, 8, 7, 6, 5, 4, 3, 2].zip(raw[0..8].map(&:to_i)).map { |n,m| n * m }.inject(0) { |i,j| i + j } % 11
+      cd = 11 - 10.downto(2).to_a.zip(raw[0..8].map(&:to_i)).map { |n,m| n * m }.inject(0) { |i,j| i + j } % 11
       case cd
       when 0..9 then cd.to_s
       when 10 then 'X'
@@ -48,7 +48,7 @@ module Bookland
     end
 
     def cd13(raw)
-      ((10 - [1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3].zip(raw[0..11].map(&:to_i)).map { |n,m| n * m }.inject(0) { |i,j| i + j } % 10) % 10).to_s
+      ((10 - ([1, 3] * 6).zip(raw[0..11].map(&:to_i)).map { |n,m| n * m }.inject(0) { |i,j| i + j } % 10) % 10).to_s
     end
 
     def isbn10?
