@@ -41,7 +41,7 @@ module Bookland
     end
 
     def to_s(*blocks)
-      raise ISBNError unless valid?
+      return false unless valid?
 
       raw = @raw.dup
       blocks.any? ? (blocks.map { |i| raw.shift(i).to_s } << raw.to_s).delete_if(&:empty?).join('-') : raw.to_s

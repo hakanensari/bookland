@@ -62,8 +62,8 @@ module Bookland
       ISBN.new("048511335X").to_s(1, 3, 5, 1).should == '0-485-11335-X'
     end
 
-    it "should raise an error if an invalid ISBN is cast as string" do
-      ['foo', 1, '', nil].each { |seed| lambda { ISBN.new(seed).to_s }.should raise_error ISBNError }
+    it "should return false if an invalid ISBN is cast as string" do
+      ['foo', 1, '', nil].each { |seed| ISBN.new(seed).to_s.should be_false }
     end
 
     it "should raise an error if an invalid ISBN-13 is converted to ISBN-10" do
