@@ -11,5 +11,7 @@ Bookland provides a simple ISBN class in Ruby.
     => "0-262-01153-0"
     >> ISBN.new("9780262011532") == book
     => true
-    >> ISBN.new("0262011531") # This is an invalid ISBN
-    Bookland::ISBNError: ISBN not valid...
+    >> invalid_book = ISBN.new("0262011531") # This is an invalid ISBN
+    => false
+    >> invalid_book.to_isbn13
+    => Bookland::ISBNError: ISBN not valid
