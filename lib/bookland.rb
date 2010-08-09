@@ -2,12 +2,22 @@ module Bookland
 
   # A simple ISBN class
   class ISBN
-    def ==(other)
-      self.to_isbn13.to_s == other.to_isbn13.to_s
+    class << self
+      def to_10(isbn)
+        new(isbn).to_isbn10.to_s
+      end
+
+      def to_13(isbn)
+        new(isbn).to_isbn13.to_s
+      end
     end
 
     def initialize(seed=nil)
       self.seed = seed
+    end
+
+    def ==(other)
+      self.to_isbn13.to_s == other.to_isbn13.to_s
     end
 
     def inspect
@@ -44,7 +54,7 @@ module Bookland
       return false unless valid?
 
       raw = @raw.dup
-      blocks.any? ? (blocks.map { |i| raw.shift(i).to_s } << raw.to_s).delete_if(&:empty?).join('-') : raw.to_s
+      blocks.any? ? (blocks.map { |i| raw.shift(i).join } << raw.join).delete_if(&:empty?).join('-') : raw.join
     end
 
     def valid?
