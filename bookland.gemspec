@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{bookland}
-  s.version = "0.2.0"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Hakan Ensari", "Piotr Laszewski"]
-  s.date = %q{2010-04-28}
+  s.date = %q{2010-08-09}
   s.description = %q{A simple ISBN class in Ruby}
   s.email = %q{code@papercavalier.com}
   s.extra_rdoc_files = [
@@ -18,12 +18,18 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".gitignore",
+     ".rspec",
+     ".rvmrc",
+     "Gemfile",
+     "Gemfile.lock",
      "History.md",
      "LICENSE",
      "README.md",
      "Rakefile",
      "VERSION",
+     "bookland.gemspec",
      "lib/bookland.rb",
+     "rake_rubies.sh",
      "spec/bookland_spec.rb",
      "spec/fixtures/isbn",
      "spec/spec_helper.rb"
@@ -31,7 +37,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/papercavalier/bookland}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.6}
+  s.rubygems_version = %q{1.3.7}
   s.summary = %q{A simple ISBN class in Ruby}
   s.test_files = [
     "spec/bookland_spec.rb",
@@ -42,7 +48,7 @@ Gem::Specification.new do |s|
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
     else
     end
   else
