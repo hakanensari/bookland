@@ -17,7 +17,7 @@ module Bookland
     end
 
     def ==(other)
-      self.to_isbn13.to_s == other.to_isbn13.to_s
+      to_isbn13.to_s == other.to_isbn13.to_s
     end
 
     def inspect
@@ -35,7 +35,7 @@ module Bookland
         raw = @raw[3..11]
         ISBN.new((raw << check_digit_10(raw)).to_s)
       else
-        self.dup
+        dup
       end
     end
 
@@ -46,7 +46,7 @@ module Bookland
         raw = @raw[0..8].unshift('9', '7', '8')
         ISBN.new((raw << check_digit_13(raw)).to_s)
       else
-        self.dup
+        dup
       end
     end
 
