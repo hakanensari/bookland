@@ -3,10 +3,10 @@ Bookland
 
 Bookland provides a simple ISBN class in Ruby.
 
+![ISBN](http://upload.wikimedia.org/wikipedia/commons/thumb/2/28/EAN-13-ISBN-13.svg/540px-EAN-13-ISBN-13.svg.png)
+
 Examples
 --------
-
-![ISBN](http://upload.wikimedia.org/wikipedia/commons/thumb/2/28/EAN-13-ISBN-13.svg/540px-EAN-13-ISBN-13.svg.png)
 
     >> book = Bookland::ISBN.new("0262011530")
     >> book.to_isbn13
