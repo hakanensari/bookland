@@ -8,27 +8,35 @@ Bookland provides a simple ISBN class in Ruby.
 Examples
 --------
 
-    >> book = Bookland::ISBN.new("0262011530")
-    >> book.to_isbn13
+    include Bookland
+    
+    book = ISBN.new("0262011530")
+    book.to_isbn13
     => "9780262011532"
-    >> book.to_s(1, 3, 5)
+    
+    book.to_s(1, 3, 5)
     => "0-262-01153-0"
-    >> ISBN.new("9780262011532") == book
+    
+    book == ISBN.new("9780262011532")
     => true
-    >> invalid_book = ISBN.new("0262011531") # This is an invalid ISBN
-    >> invalid_book.valid?
+    
+    # An invalid ISBN
+    book = ISBN.new("0262011531")
+    book.valid?
     => false
-    >> invalid_book.to_isbn13
+    
+    book.to_isbn13
     => Bookland::ISBNError: ISBN not valid
 
 Conversely, use the class methods:
 
-    >> Bookland::ISBN.to_13("0262011530")
+    Bookland::ISBN.to_13("0262011530")
     => "9780262011532"
+    
     >> Bookland::ISBN.to_10("9780262011532")
     => "0262011530"
 
 Compatibility
 -------------
 
-Specs pass against Ruby 1.8.7, 1.9.1, 1.9.2, and REE.
+Specs pass against all usual suspects, including Ruby 1.8.7, 1.9.1, and 1.9.2.
