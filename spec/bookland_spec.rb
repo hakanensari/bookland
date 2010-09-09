@@ -23,6 +23,11 @@ module Bookland
           lambda { Bookland::ISBN.to_13(isbn)}.should raise_error Bookland::ISBNError
         end
       end
+
+      it "validates an ISBN" do
+        Bookland::ISBN.valid?("9780485113358").should be_true
+        Bookland::ISBN.valid?("9780485113359").should be_false
+      end
     end
 
     it "converts an ISBN-10 to ISBN-13" do

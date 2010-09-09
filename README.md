@@ -28,13 +28,17 @@ Examples
     book.to_isbn13
     => Bookland::ISBNError: ISBN not valid
 
-Conversely, use the class methods:
+Or use some class methods:
 
-    Bookland::ISBN.to_13("0262011530")
+    include Bookland
+    ISBN.to_13("0262011530")
     => "9780262011532"
     
-    >> Bookland::ISBN.to_10("9780262011532")
+    ISBN.to_10("9780262011532")
     => "0262011530"
+
+    ISBN.valid?("9780262011532")
+    => true
 
 Compatibility
 -------------

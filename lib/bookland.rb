@@ -10,6 +10,10 @@ module Bookland
       def to_13(isbn)
         new(isbn).to_isbn13.to_s
       end
+
+      def valid?(isbn)
+        new(isbn).valid?
+      end
     end
 
     def initialize(seed=nil)
