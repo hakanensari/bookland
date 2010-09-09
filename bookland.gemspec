@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{bookland}
-  s.version = "0.3.0"
+  s.version = "0.3.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Hakan Ensari", "Piotr Laszewski"]
-  s.date = %q{2010-08-09}
+  s.date = %q{2010-09-09}
   s.description = %q{A simple ISBN class in Ruby}
   s.email = %q{code@papercavalier.com}
   s.extra_rdoc_files = [
@@ -29,7 +29,6 @@ Gem::Specification.new do |s|
      "VERSION",
      "bookland.gemspec",
      "lib/bookland.rb",
-     "rake_rubies.sh",
      "spec/bookland_spec.rb",
      "spec/fixtures/isbn",
      "spec/spec_helper.rb"
