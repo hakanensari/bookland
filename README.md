@@ -1,46 +1,39 @@
 Bookland
 ========
 
-Bookland provides a simple ISBN class in Ruby.
-
-![ISBN](http://upload.wikimedia.org/wikipedia/commons/thumb/2/28/EAN-13-ISBN-13.svg/540px-EAN-13-ISBN-13.svg.png)
+[Bookland](http://en.wikipedia.org/wiki/Bookland) provides an ISBN class in Ruby.
 
 Examples
 --------
 
     include Bookland
-    
-    book = ISBN.new("0262011530")
-    book.to_isbn13
-    => "9780262011532"
-    
-    book.to_s(1, 3, 5)
-    => "0-262-01153-0"
-    
-    book == ISBN.new("9780262011532")
-    => true
-    
-    # An invalid ISBN
-    book = ISBN.new("0262011531")
-    book.valid?
-    => false
-    
-    book.to_isbn13
-    => Bookland::ISBNError: ISBN not valid
 
-Or use some class methods:
+    isbn10 = ISBN.new('0262011530')
+    isbn10.to_isbn13
+    => "9780262011532"
+
+    isbn10.to_s(1, 3, 5)
+    => "0-262-01153-0"
+
+    isbn13 == ISBN.new('9780262011532')
+    => true
+
+    # An invalid ISBN
+    not_an_isbn = ISBN.new('0262011531')
+    not_an_isbn.valid?
+    => false
+    not_an_isbn.to_isbn13
+    => Bookland::ISBNError: Invalid ISBN
+
+Some utility methods defined in the class level:
 
     include Bookland
-    ISBN.to_13("0262011530")
+
+    ISBN.to_13('0262011530')
     => "9780262011532"
-    
-    ISBN.to_10("9780262011532")
+
+    ISBN.to_10('9780262011532')
     => "0262011530"
 
-    ISBN.valid?("9780262011532")
+    ISBN.valid?('9780262011532')
     => true
-
-Compatibility
--------------
-
-Specs pass against all usual suspects, including Ruby 1.8.7, 1.9.1, and 1.9.2.
