@@ -1,16 +1,37 @@
+# encoding: UTF-8
+#
+# [Bookland][bl] is a simple ISBN class in Ruby.
+#
+# [bl]: http://en.wikipedia.org/wiki/Bookland
 module Bookland
 
-  # A simple ISBN class
+  #### Public Interface
+  #
+  # `ISBN.new` takes an optional string. The string should look like an ISBN
+  # and may contain extra characters that are traditionally used to format
+  # ISBNs.
+  #
+  # The following are valid instantiations:
+  #
+  #     isbn13 = ISBN.new('9780826476951')
+  #     isbn10 = ISBN.new('0-8264-7695-3')
+  #
+  #     isbn10 == isbn13
+  #     => true
   class ISBN
     class << self
+
+      # Casts a specified string to a 10-digit ISBN.
       def to_10(isbn)
         new(isbn).to_isbn10.to_s
       end
 
+      # Casts a specified string to a 13-digit ISBN.
       def to_13(isbn)
         new(isbn).to_isbn13.to_s
       end
 
+      # Returns `true` if the specified string is a valid ISBN.
       def valid?(isbn)
         new(isbn).valid?
       end
@@ -20,19 +41,24 @@ module Bookland
       self.seed = seed
     end
 
+    # Returns `true` if the ISBN is equal to another specified ISBN.
     def ==(other)
       to_isbn13.to_s == other.to_isbn13.to_s
     end
 
+    # Inspecting an ISBN object will return its string representation.
     def inspect
       to_s
     end
 
+    # Sets the seed of the ISBN based on a specified string.
     def seed=(seed)
       @raw = seed.gsub(/[^Xx0-9]/, '').split(//) rescue @raw = []
     end
 
+    # Casts the ISBN to a ten-digit ISBN.
     def to_isbn10
+
       raise ISBNError unless valid?
 
       if isbn13?
@@ -54,13 +80,27 @@ module Bookland
       end
     end
 
+    # Casts ISBN to a string.
+    #
+    # Takes an optional list of integers, which it then uses to dashify the
+    # ISBN like so:
+    #
+    #     isbn = ISBN.new('0826476953')
+    #     isbn.to_s(1,4,4,1)
+    #     => "0-8264-7695-3"
+    #
     def to_s(*blocks)
       return false unless valid?
 
       raw = @raw.dup
-      blocks.any? ? (blocks.map { |i| raw.shift(i).join } << raw.join).delete_if(&:empty?).join('-') : raw.join
+      if blocks.any?
+        (blocks.map { |i| raw.shift(i).join } << raw.join).delete_if(&:empty?).join('-')
+      else
+        raw.join
+      end
     end
 
+    # Returns `true` if the ISBN is valid.
     def valid?
       if isbn10?
         @raw[9] == check_digit_10(@raw)
@@ -102,3 +142,5 @@ module Bookland
     end
   end
 end
+
+# C'est ça.
