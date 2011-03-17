@@ -26,7 +26,7 @@ Usage
     bad_isbn.to_isbn13
     => Bookland::ISBNError: Invalid ISBN
 
-Some utility methods defined in the class level:
+Some utility methods defined on the class level:
 
     ISBN.to_13('0262011530')
     => "9780262011532"
