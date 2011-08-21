@@ -2,6 +2,8 @@
 
 [Bookland] [1] provides an ISBN class in Ruby.
 
+[![travis](https://secure.travis-ci.org/hakanensari/bookland.png)](http://travis-ci.org/hakanensari/bookland)
+
 ## Usage
 
     require "bookland"
