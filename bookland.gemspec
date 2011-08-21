@@ -20,5 +20,4 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
 
   s.add_development_dependency('rspec', '~> 2.5.0')
-  s.add_development_dependency('rocco', '~> 0.6.0')
 end
