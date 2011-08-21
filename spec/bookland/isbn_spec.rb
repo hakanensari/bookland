@@ -153,7 +153,7 @@ module Bookland
         ISBN.new('9780485113358').to_s(3, 10).should eql '978-0485113358'
       end
 
-      it "casts to string and hyphenate a ten-digit ISBN" do
+      it "casts to string and hyphenates a ten-digit ISBN" do
         ISBN.new('048511335X').to_s(1, 3, 5, 1).should eql '0-485-11335-X'
       end
 
