@@ -8,7 +8,7 @@
 
 ```ruby
 # Gemfile
-gem 'bookland'
+gem 'bookland', '~> 2.0.0.beta'
 ```
 
 ## Usage
