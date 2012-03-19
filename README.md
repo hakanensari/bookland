@@ -1,28 +1,34 @@
 # Bookland
 
-[Bookland] [1] provides an ISBN class in Ruby.
+[![travis] [1]] [2]
 
-[![travis](https://secure.travis-ci.org/hakanensari/bookland.png)](http://travis-ci.org/hakanensari/bookland)
+[Bookland] [3] provides ISBN and EAN classes in Ruby.
+
+## Installation
+
+```ruby
+# Gemfile
+gem 'bookland'
+```
 
 ## Usage
 
-    require "bookland"
+```ruby
+include 'bookland'
 
-    isbn = ISBN.new("0262011530")
-    isbn.to_isbn13
-    => "9780262011532"
-    isbn.valid?
-    => true
+isbn = ISBN.new "9780262011532"
+isbn.valid? # => true
+isbn10 = isbn.to_isbn_10
+isbn10.to_s # => "0262011530"
+```
 
-Bookland provides certain utility methods defined on the class level:
+Alternatively, use utility methods defined on the class level:
 
-    ISBN.to_13("0262011530")
-    => "9780262011532"
+```ruby
+EAN.valid?  '0814916013890' # => true
+ISBN.valid? '0814916013890' # => false
+```
 
-    ISBN.to_10("9780262011532")
-    => "0262011530"
-
-    ISBN.valid?("9780262011532")
-    => true
-
-[1]: http://en.wikipedia.org/wiki/Bookland
+[1]: https://secure.travis-ci.org/hakanensari/bookland.png
+[2]: http://travis-ci.org/hakanensari/bookland
+[3]: http://en.wikipedia.org/wiki/Bookland

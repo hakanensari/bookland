@@ -1,4 +1,6 @@
-require 'bookland/isbn'
+require 'bookland/identifier'
+require 'bookland/invalid_isbn'
 
-# Include Bookland in global namespace.
-Object.send(:include, Bookland)
+require 'bookland/ean'
+require 'bookland/isbn'
+require 'bookland/isbn_10'
