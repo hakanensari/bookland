@@ -22,7 +22,7 @@ isbn10 = isbn.to_isbn_10
 isbn10.to_s # => "0262011530"
 ```
 
-Alternatively, use utility methods defined on the class level:
+Or use utility methods on the class level:
 
 ```ruby
 EAN.valid?  '0814916013890' # => true
