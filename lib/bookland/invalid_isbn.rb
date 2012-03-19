@@ -1,3 +1,4 @@
 module Bookland
-  class InvalidISBN < StandardError; end
+  class InvalidISBN < StandardError
+  end
 end

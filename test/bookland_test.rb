@@ -41,7 +41,7 @@ end
 
 class TestISBN < Test::Unit::TestCase
   def test_validates_isbns
-    File.open(File.expand_path("../isbns", __FILE__)).each do |line|
+    File.open(File.expand_path('../isbns', __FILE__)).each do |line|
       isbn = line.split.last.chomp
       assert ISBN.valid? isbn
     end
@@ -66,7 +66,7 @@ end
 
 class TestISBN10 < Test::Unit::TestCase
   def test_validates_isbn_10s
-    File.open(File.expand_path("../isbns", __FILE__)).each do |line|
+    File.open(File.expand_path('../isbns', __FILE__)).each do |line|
       isbn10 = line.split.first.chomp
       assert ISBN10.valid? isbn10
     end
