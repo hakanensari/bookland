@@ -4,7 +4,7 @@ module Bookland
     # Calculates the checksum for the 9-digit payload of an ISBN-10.
     def self.calculate_checksum(payload)
       payload.map! &:to_i
-      weights = 10.downto 2
+      weights = 10.downto(2).to_a
       sum = payload.zip(weights).inject(0) { |a , (i, j)| a + i * j }
       checksum = 11 - sum % 11
 
