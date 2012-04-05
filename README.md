@@ -6,9 +6,8 @@
 
 ## Installation
 
-```ruby
-# Gemfile
-gem 'bookland', '~> 2.0.0.beta'
+```sh
+gem install bookland
 ```
 
 ## Usage
@@ -16,7 +15,7 @@ gem 'bookland', '~> 2.0.0.beta'
 ```ruby
 include 'bookland'
 
-isbn = ISBN.new "9780262011532"
+isbn = ISBN.new '9780262011532'
 isbn.valid? # => true
 isbn10 = isbn.to_isbn_10
 isbn10.to_s # => "0262011530"
