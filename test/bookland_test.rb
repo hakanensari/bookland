@@ -5,6 +5,12 @@ require 'bookland'
 
 include Bookland
 
+module Test::Unit::Assertions
+  def assert_false(object, message = '')
+    assert_equal false, object, message
+  end
+end
+
 class TestIdentifier < Test::Unit::TestCase
   def setup
     @id = Identifier.new '123'
@@ -30,12 +36,12 @@ class TestEAN < Test::Unit::TestCase
   end
 
   def test_does_not_validate_if_not_13_digits
-    assert !EAN.valid?('978082647694')
-    assert !EAN.valid?('97808264769444')
+    assert_false EAN.valid?('978082647694')
+    assert_false EAN.valid?('97808264769444')
   end
 
   def test_does_not_validate_if_checksum_not_correct
-    assert !EAN.valid?('9780826476940')
+    assert_false EAN.valid?('9780826476940')
   end
 end
 
@@ -48,7 +54,7 @@ class TestISBN < Test::Unit::TestCase
   end
 
   def test_does_not_validate_an_ean_that_is_not_a_book
-    assert !ISBN.valid?('0814916013890')
+    assert_false ISBN.valid?('0814916013890')
   end
 
   def test_converts_to_isbn_10
@@ -85,11 +91,11 @@ class TestISBN10 < Test::Unit::TestCase
   end
 
   def test_does_not_validate_if_not_13_digits
-    assert !EAN.valid?('014310582')
-    assert !EAN.valid?('01431058255')
+    assert_false EAN.valid?('014310582')
+    assert_false EAN.valid?('01431058255')
   end
 
   def test_does_not_validate_if_checksum_not_correct
-    assert !EAN.valid?('0143105820')
+    assert_false EAN.valid?('0143105820')
   end
 end

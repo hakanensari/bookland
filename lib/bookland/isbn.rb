@@ -18,7 +18,7 @@ module Bookland
 
     # Whether the ISBN is valid.
     def valid?
-      @raw.match(/^97[89]/) && super
+      !!@raw.match(/^97[89]/) && super
     end
   end
 end
