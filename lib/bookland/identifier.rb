@@ -1,32 +1,33 @@
 module Bookland
-  # An abstract unique commercial identifier for a product.
   class Identifier
-    def self.calculate_checksum(payload)
-      raise NotImplementedError
-    end
-
     def self.valid?(raw)
       new(raw).valid?
     end
 
+    def self.calculate_checksum_digit(data_digits)
+      raise NotImplementedError
+    end
+
+    attr :digits
+
     def initialize(raw)
-      @raw = raw
+      @digits = raw.split('')
     end
 
-    def checksum
-      digits[-1]
-    end
-
-    def payload
+    def data_digits
       digits[0...-1]
     end
 
+    def checksum_digit
+      digits[-1]
+    end
+
     def to_s
-      @raw
+      digits.join
     end
 
     def valid?
-      checksum == self.class.calculate_checksum(payload)
+      checksum_digit == recalculate_checksum_digit
     end
 
     def ==(other)
@@ -35,8 +36,8 @@ module Bookland
 
     private
 
-    def digits
-      @digits ||= @raw.split ''
+    def recalculate_checksum_digit
+      self.class.calculate_checksum_digit(data_digits)
     end
   end
 end

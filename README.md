@@ -1,12 +1,10 @@
 # Bookland
 
-[![travis] [1]] [2]
-
-[Bookland] [3] provides ISBN and EAN classes in Ruby.
+[Bookland][bo] provides ISBN and ASIN classes, which should come in handy when trading books online.
 
 ## Installation
 
-```sh
+```bash
 gem install bookland
 ```
 
@@ -15,19 +13,9 @@ gem install bookland
 ```ruby
 include 'bookland'
 
-isbn = ISBN.new '9780262011532'
-isbn.valid? # => true
-isbn10 = isbn.to_isbn_10
-isbn10.to_s # => "0262011530"
+ISBN.valid?('9780262011532') # => true
+ASIN.from_isbn('9780262011532') # => "0262011530"
+ASIN.to_isbn('0262011530') # => "9780262011532"
 ```
 
-Or use utility methods on the class level:
-
-```ruby
-EAN.valid?  '0814916013890' # => true
-ISBN.valid? '0814916013890' # => false
-```
-
-[1]: https://secure.travis-ci.org/hakanensari/bookland.png
-[2]: http://travis-ci.org/hakanensari/bookland
-[3]: http://en.wikipedia.org/wiki/Bookland
+[bo]: http://en.wikipedia.org/wiki/Bookland
