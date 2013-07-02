@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TestASIN < MiniTest::Test
+class TestASIN < MiniTest::Unit::TestCase
   def test_validates_isbn_like_asins
     File.open('./test/data/isbns').each do |line|
       asin = line.split.first.chomp

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TestEAN < MiniTest::Test
+class TestEAN < MiniTest::Unit::TestCase
   def test_validates
     assert EAN.valid?('0814916013890')
   end

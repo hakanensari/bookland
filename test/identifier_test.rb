@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TestIdentifier < MiniTest::Test
+class TestIdentifier < MiniTest::Unit::TestCase
   def setup
     @id = Identifier.new('123')
   end

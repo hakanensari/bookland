@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TestISBN < MiniTest::Test
+class TestISBN < MiniTest::Unit::TestCase
   def test_validates
     File.open('./test/data/isbns').each do |line|
       isbn = line.split.last.chomp
