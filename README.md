@@ -10,6 +10,7 @@
 include 'bookland'
 
 # functional
+EAN.valid?('0814916013890') # => true
 ISBN.valid?('9780262011532') # => true
 
 # oo
@@ -17,7 +18,7 @@ isbn = ISBN.new('9780262011532')
 isbn.valid? # => true
 ```
 
-**Bookland** also comes with an :poop: ASIN class:
+**Bookland** also comes with an ASIN class:
 
 ```ruby
 isbn = '9780262011532'
@@ -25,7 +26,7 @@ asin = ASIN.from_isbn(isbn) # => "0262011530"
 ASIN.to_isbn(asin) # => "9780262011532"
 ```
 
-Caveat: `ASIN` does not calculate the checksum digit for propietary ASINs. If you happen to break their code, ping me.
+Caveat: `ASIN` does not calculate the checksum digit for propietary ASINs. If you happen to break their algo, ping me.
 
 All three classes expose a class-level `calculate_checksum_digit` method:
 
@@ -34,7 +35,7 @@ data_digits = [9, 7, 8, 0, 2, 6, 2, 1, 1, 5, 3]
 ISBN.calculate_checksum_digit(data_digits) # => 2
 ```
 
-Rails-heads: **Bookland** will include custom EAN, ISBN, and ASIN validators if Active Model is loaded. Use it like so:
+**Bookland** includes custom EAN, ISBN, and ASIN validators if Active Model is loaded. Use it like so:
 
 ```ruby
 class Book
@@ -46,6 +47,6 @@ class Book
 end
 ```
 
-:metal:
+:metal::metal:
 
 [bo]: http://en.wikipedia.org/wiki/Bookland
