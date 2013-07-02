@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version     = Bookland::VERSION
   spec.authors     = ['Hakan Ensari']
   spec.email       = 'hakan.ensari@papercavalier.com'
-  spec.description = %q{An ISBN toolkit}
+  spec.description = %q{Provides EAN, ISBN, and ASIN classes and validators in Ruby}
   spec.summary     = %q{An ISBN toolkit}
   spec.homepage    = 'https://github.com/hakanensari/bookland'
   spec.license     = 'MIT'
