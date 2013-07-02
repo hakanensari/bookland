@@ -1,29 +1,13 @@
-class AsinValidator < ActiveModel::EachValidator
-  def validate_each(record, attribute, value)
-    return if value.nil? && options[:allow_nil]
+%w(ASIN EAN ISBN).each do |klass|
+  Object.class_eval <<-EOF
+    class #{klass.capitalize}Validator < ActiveModel::EachValidator
+      def validate_each(record, attribute, value)
+        return if value.nil? && options[:allow_nil]
 
-    unless Bookland::ASIN.valid?(value)
-      record.errors[attribute] << (options[:message] || 'is not an ASIN')
+        unless Bookland::#{klass}.valid?(value)
+          record.errors[attribute] << (options[:message] || 'is not an #{klass}')
+        end
+      end
     end
-  end
-end
-
-class EanValidator < ActiveModel::EachValidator
-  def validate_each(record, attribute, value)
-    return if value.nil? && options[:allow_nil]
-
-    unless Bookland::EAN.valid?(value.to_s)
-      record.errors[attribute] << (options[:message] || 'is not an EAN')
-    end
-  end
-end
-
-class IsbnValidator < ActiveModel::EachValidator
-  def validate_each(record, attribute, value)
-    return if value.nil? && options[:allow_nil]
-
-    unless Bookland::ISBN.valid?(value)
-      record.errors[attribute] << (options[:message] || 'is not an ISBN')
-    end
-  end
+  EOF
 end
