@@ -1,21 +1,51 @@
 # Bookland
 
-[Bookland][bo] provides ISBN and ASIN classes, which should come in handy when trading books online.
-
-## Installation
-
-```bash
-gem install bookland
-```
+> [Bookland][bo] is a fictitious country that exists solely for the purposes of non-geographically cataloguing books in the otherwise geographically keyed EAN coding system.
 
 ## Usage
+
+**Bookland** provides EAN and ISBN classes:
 
 ```ruby
 include 'bookland'
 
+# functional
 ISBN.valid?('9780262011532') # => true
-ASIN.from_isbn('9780262011532') # => "0262011530"
-ASIN.to_isbn('0262011530') # => "9780262011532"
+
+# oo
+isbn = ISBN.new('9780262011532')
+isbn.valid? # => true
 ```
+
+**Bookland** also comes with an :poop: ASIN class:
+
+```ruby
+isbn = '9780262011532'
+asin = ASIN.from_isbn(isbn) # => "0262011530"
+ASIN.to_isbn(asin) # => "9780262011532"
+```
+
+Caveat: `ASIN` does not calculate the checksum digit for propietary ASINs. If you happen to break their code, ping me.
+
+All three classes expose a class-level `calculate_checksum_digit` method:
+
+```ruby
+data_digits = [9, 7, 8, 0, 2, 6, 2, 1, 1, 5, 3]
+ISBN.calculate_checksum_digit(data_digits) # => 2
+```
+
+Rails-heads: **Bookland** will include custom EAN, ISBN, and ASIN validators if Active Model is loaded. Use it like so:
+
+```ruby
+class Book
+  include ActiveModel::Model
+
+  attr_accessor :isbn
+
+  validates :isbn, isbn: true
+end
+```
+
+:metal:
 
 [bo]: http://en.wikipedia.org/wiki/Bookland
