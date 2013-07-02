@@ -27,6 +27,13 @@ class TestValidators < MiniTest::Unit::TestCase
     assert instance.valid?
   end
 
+  def test_validates_asin_with_message
+    @klass.validates(:attribute, asin: true)#, { message: 'is bad' })
+    instance = @klass.new(attribute: '123')
+    instance.valid?
+    assert_includes instance.errors.first, 'is not an ASIN'
+  end
+
   def test_validates_asin_strictly
     @klass.validates!(:attribute, asin: true)
     instance = @klass.new(attribute: '0262011530')
@@ -52,6 +59,13 @@ class TestValidators < MiniTest::Unit::TestCase
     assert instance.valid?
   end
 
+  def test_validates_ean_with_message
+    @klass.validates(:attribute, ean: true)#, { message: 'is bad' })
+    instance = @klass.new(attribute: '123')
+    instance.valid?
+    assert_includes instance.errors.first, 'is not an EAN'
+  end
+
   def test_validates_ean_strictly
     @klass.validates!(:attribute, ean: true)
     instance = @klass.new(attribute: '0814916013890')
@@ -74,6 +88,13 @@ class TestValidators < MiniTest::Unit::TestCase
     @klass.validates(:attribute, isbn: true, allow_nil: true)
     instance = @klass.new
     assert instance.valid?
+  end
+
+  def test_validates_isbn_with_message
+    @klass.validates(:attribute, isbn: true)#, { message: 'is bad' })
+    instance = @klass.new(attribute: '123')
+    instance.valid?
+    assert_includes instance.errors.first, 'is not an ISBN'
   end
 
   def test_validates_isbn_strictly

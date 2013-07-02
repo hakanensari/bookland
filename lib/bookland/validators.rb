@@ -5,10 +5,11 @@
         return if value.nil? && options[:allow_nil]
 
         unless Bookland::#{klass}.valid?(value)
+          message = "is not an #{klass}"
           if options[:strict]
-            raise ActiveModel::StrictValidationFailed, "\#{value} \#{options[:message] || "is not an #{klass}"}"
+            raise ActiveModel::StrictValidationFailed, "\#{value} \#{message}"
           else
-            record.errors[attribute] << (options[:message] || 'is not an #{klass}')
+            record.errors[attribute] << message
           end
         end
       end
