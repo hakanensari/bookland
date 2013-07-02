@@ -28,7 +28,7 @@ class TestValidators < MiniTest::Unit::TestCase
   end
 
   def test_validates_asin_with_message
-    @klass.validates(:attribute, asin: true)#, { message: 'is bad' })
+    @klass.validates(:attribute, asin: true)
     instance = @klass.new(attribute: '123')
     instance.valid?
     assert_includes instance.errors.first, 'is not an ASIN'
@@ -60,7 +60,7 @@ class TestValidators < MiniTest::Unit::TestCase
   end
 
   def test_validates_ean_with_message
-    @klass.validates(:attribute, ean: true)#, { message: 'is bad' })
+    @klass.validates(:attribute, ean: true)
     instance = @klass.new(attribute: '123')
     instance.valid?
     assert_includes instance.errors.first, 'is not an EAN'
@@ -91,7 +91,7 @@ class TestValidators < MiniTest::Unit::TestCase
   end
 
   def test_validates_isbn_with_message
-    @klass.validates(:attribute, isbn: true)#, { message: 'is bad' })
+    @klass.validates(:attribute, isbn: true)
     instance = @klass.new(attribute: '123')
     instance.valid?
     assert_includes instance.errors.first, 'is not an ISBN'
