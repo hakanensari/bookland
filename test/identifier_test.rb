@@ -26,4 +26,8 @@ class TestIdentifier < MiniTest::Test
     assert_raises(NotImplementedError) { Identifier.valid?('123') }
     assert_raises(NotImplementedError) { @id.valid? }
   end
+
+  def test_validator_casts_input_to_string
+    assert_raises(NotImplementedError) { Identifier.valid?(nil) }
+  end
 end

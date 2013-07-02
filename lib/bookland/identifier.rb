@@ -1,7 +1,7 @@
 module Bookland
   class Identifier
     def self.valid?(raw)
-      new(raw).valid?
+      new(raw.to_s).valid?
     end
 
     def self.calculate_checksum_digit(data_digits)
