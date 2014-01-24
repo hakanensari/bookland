@@ -11,7 +11,7 @@ module Bookland
     attr :digits
 
     def initialize(raw)
-      @digits = raw.split('')
+      @digits = raw.gsub('-','').split('')
     end
 
     def data_digits
