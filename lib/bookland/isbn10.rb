@@ -1,11 +1,11 @@
 module Bookland
   # The now-obsolete 10-digit ISBN.
   class ISBN10 < Identifier
-    # Calculates the checksum for the 9-digit payload of an ISBN-10.
-    def self.calculate_checksum_digit(payload)
-      payload.map! &:to_i
+    # Calculates the checksum for the 9-digit data_digits of an ISBN-10.
+    def self.calculate_checksum_digit(data_digits)
+      data_digits.map! &:to_i
       weights = 10.downto(2).to_a
-      sum = payload.zip(weights).inject(0) { |a , (i, j)| a + i * j }
+      sum = data_digits.zip(weights).inject(0) { |a , (i, j)| a + i * j }
       checksum = 11 - sum % 11
 
       case checksum
@@ -24,10 +24,10 @@ module Bookland
     def to_isbn
       raise InvalidISBN unless valid?
 
-      new_payload = [9, 7, 8] +  payload
-      new_checksum = ISBN.calculate_checksum_digit new_payload
+      new_data_digits = [9, 7, 8] +  data_digits
+      new_checksum = ISBN.calculate_checksum_digit new_data_digits
 
-      (new_payload << new_checksum).join
+      (new_data_digits << new_checksum).join
     end
 
     def valid?
