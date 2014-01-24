@@ -31,13 +31,13 @@ module ValidationExtensions
       options[:message]     ||= "is not a valid ISBN code"
       options[:allow_nil]   ||= false
       options[:allow_blank] ||= false
-      options[:compat] ||= true
+      options[:compatible] ||= true
       super(options)
     end
 
     def validate_each(record, attribute, value)
       return if  (value.nil? && options[:allow_nil]) || (value.blank? && options[:allow_blank])
-      unless Bookland::ISBN.valid?(value) || (options[:compact] && Bookland::ISBN10.valid?(value))
+      unless Bookland::ISBN.valid?(value) || (options[:compatible] && Bookland::ISBN10.valid?(value))
         record.errors.add(attribute, options[:message])
       end
     end
@@ -50,4 +50,6 @@ module ValidationExtensions
   end  
 end
 
+ActiveModel::Validations.send(:include, ValidationExtensions)
 ActiveModel::Validations::HelperMethods.send(:include, ValidationExtensions::HelperMethods)
+
