@@ -1,5 +1,5 @@
-.DS_Store
-pkg
-.bundle
 Gemfile.lock
-docs
+.yardoc
+coverage
+doc
+pkg

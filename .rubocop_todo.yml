@@ -1,0 +1,8 @@
+Lint/AmbiguousRegexpLiteral:
+  Exclude:
+    - test/**/*
+
+Metrics/AbcSize:
+  Max: 18.55
+Metrics/MethodLength:
+  Max: 14

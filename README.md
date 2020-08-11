@@ -47,6 +47,4 @@ class Book
 end
 ```
 
-:metal::metal:
-
 [bo]: http://en.wikipedia.org/wiki/Bookland

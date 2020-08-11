@@ -1,25 +1,24 @@
-# coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+# frozen_string_literal: true
+
+$LOAD_PATH.push File.expand_path('lib', __dir__)
 require 'bookland/version'
 
-Gem::Specification.new do |spec|
-  spec.name        = 'bookland'
-  spec.version     = Bookland::VERSION
-  spec.authors     = ['Hakan Ensari']
-  spec.email       = 'hakan.ensari@papercavalier.com'
-  spec.description = %q{Provides EAN, ISBN, and ASIN classes and validators in Ruby}
-  spec.summary     = %q{An ISBN toolkit}
-  spec.homepage    = 'https://github.com/hakanensari/bookland'
-  spec.license     = 'MIT'
+Gem::Specification.new do |gem|
+  gem.name = 'bookland'
+  gem.version = Bookland::VERSION
+  gem.authors = ['Hakan Ensari']
+  gem.email = 'me@hakanensari.com'
+  gem.homepage = 'https://github.com/hakanensari/bookland'
+  gem.summary = 'Parse and validate ISBN numbers in Ruby'
+  gem.license = 'MIT'
 
-  spec.files         = `git ls-files`.split("\n")
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
-  spec.require_paths = ['lib']
+  gem.files = Dir.glob('lib/**/*') + %w[LICENSE README.md]
 
-  spec.add_development_dependency 'bundler', '~> 1.3'
-  spec.add_development_dependency 'rake'
-  spec.add_development_dependency 'minitest', '~> 4.2'
-  spec.add_development_dependency 'activemodel', '~> 4.0'
+  gem.add_dependency 'structure', '~> 2.3'
+  gem.add_development_dependency 'minitest'
+  gem.add_development_dependency 'rake'
+  gem.add_development_dependency 'rubocop'
+  gem.add_development_dependency 'rubocop-performance'
+  gem.add_development_dependency 'yard'
+  gem.required_ruby_version = '>= 2.5'
 end
